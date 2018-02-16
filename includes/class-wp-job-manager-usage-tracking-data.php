@@ -45,6 +45,7 @@ class WP_Job_Manager_Usage_Tracking_Data {
 			'jobs_expiry'                 => self::get_jobs_count_with_meta( '_job_expires' ),
 			'jobs_filled'                 => self::get_jobs_count_with_checked_meta( '_filled' ),
 			'jobs_featured'               => self::get_jobs_count_with_checked_meta( '_featured' ),
+			'jobs_by_guests'              => self::get_jobs_by_guests(),
 		);
 	}
 
@@ -157,6 +158,22 @@ class WP_Job_Manager_Usage_Tracking_Data {
 					'value' => '1',
 				),
 			),
+		) );
+
+		return $query->found_posts;
+	}
+
+	/**
+	 * Get the number of job listings posted by guests.
+	 *
+	 * @return int the number of job listings.
+	 */
+	private static function get_jobs_by_guests() {
+		$query = new WP_Query( array(
+			'post_type'   => 'job_listing',
+			'post_status' => array( 'publish', 'expired' ),
+			'fields'      => 'ids',
+			'author__in'  => array( 0 ),
 		) );
 
 		return $query->found_posts;
