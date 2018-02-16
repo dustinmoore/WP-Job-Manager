@@ -119,7 +119,7 @@ class WP_Job_Manager_Usage_Tracking_Test extends WP_UnitTestCase {
 			$this->assertEquals( array(), $wp_die_args['args'], 'wp_die call has no non-success status' );
 		}
 
-		$this->assertEquals( 1, $count, 'Data was sent on usage tracking enable' );
+		$this->assertEquals( 2, $count, 'Data was sent on usage tracking enable' );
 	}
 
 	/**
@@ -291,7 +291,7 @@ class WP_Job_Manager_Usage_Tracking_Test extends WP_UnitTestCase {
 		$this->usage_tracking->set_tracking_enabled( true );
 
 		$this->usage_tracking->send_usage_data();
-		$this->assertEquals( 1, $count, 'Request sent when Usage Tracking enabled' );
+		$this->assertEquals( 2, $count, 'Request sent when Usage Tracking enabled' );
 	}
 
 	/* Tests for tracking opt in dialog */
